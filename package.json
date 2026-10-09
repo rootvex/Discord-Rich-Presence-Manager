@@ -1,0 +1,50 @@
+{
+    "name": "discord-rich-presence-manager",
+    "version": "1.0.0",
+    "description": "Discord Rich Presence Manager",
+    "main": "main.js",
+    "author": "rootvex",
+    "license": "UNLICENSED",
+    "scripts": {
+        "start": "electron .",
+        "build": "electron-builder --win"
+    },
+    "devDependencies": {
+        "electron": "^38.0.0",
+        "electron-builder": "^26.0.12"
+    },
+    "build": {
+        "appId": "com.rootvex.richpresencemanager",
+        "productName": "Discord Rich Presence Manager",
+        "copyright": "Copyright © 2026 rootvex",
+        "files": [
+            "main.js",
+            "preload.js",
+            "index.html",
+            "style.css",
+            "renderer.js",
+            "package.json",
+            "node_modules/**/*",
+            "assets/**/*"
+        ],
+        "directories": {
+            "output": "dist"
+        },
+        "win": {
+            "target": [
+                {
+                    "target": "portable",
+                    "arch": ["x64"]
+                }
+            ],
+            "icon": "assets/icon.ico",
+            "signExecutable": false
+        },
+        "portable": {
+            "artifactName": "Discord Rich Presence Manager.exe"
+        }
+    },
+    "dependencies": {
+        "@xhayper/discord-rpc": "^1.5.1"
+    }
+}

@@ -219,14 +219,19 @@ button {
     white-space: nowrap;
 }
 
+
 .status {
+    display: flex;
+    align-items: center;
     gap: 7px;
     margin-right: 6px;
     color: var(--text-secondary);
     font-size: 12px;
+    white-space: nowrap;
 }
 
-.status > span {
+.status .status-dot {
+    flex-shrink: 0;
     width: 7px;
     height: 7px;
     border-radius: 50%;
@@ -238,7 +243,7 @@ button {
     color: var(--success);
 }
 
-.status.connected > span {
+.status.connected .status-dot {
     background: var(--success);
     box-shadow: 0 0 8px rgba(67, 209, 123, 0.35);
 }
@@ -786,21 +791,24 @@ button {
     flex: 1;
 }
 
+
 .rotation-requirement {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 8px;
     margin-top: 18px;
     padding-top: 15px;
     border-top: 1px solid var(--border);
     color: var(--text-muted);
     font-size: 10px;
+    line-height: 1.5;
 }
 
-.rotation-requirement span {
+.rotation-requirement-icon {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-shrink: 0;
     width: 17px;
     height: 17px;
     border-radius: 50%;
@@ -1369,3 +1377,16 @@ button {
         display: none;
     }
 }
+.nav-icon {
+    width: 18px;
+    height: 18px;
+    flex: 0 0 18px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.7;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    opacity: .8;
+}
+.nav-item { gap: 11px; }
+.nav-item.active .nav-icon { opacity: 1; }

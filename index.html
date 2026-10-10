@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -14,31 +13,31 @@
             <div class="brand-icon"><img src="assets/icon.png" alt="Discord Rich Presence Manager"></div>
             <div>
                 <div class="brand-title">Discord Rich Presence Manager</div>
-                <div class="brand-subtitle">• v1.0.0</div>
+                <div class="brand-subtitle">• v1.0.1</div>
             </div>
         </div>
         <div class="navigation">
-            <div class="nav-label">CONFIGURATION</div>
-            <button class="nav-item active" data-page="presence"><span>◆</span> Presence</button>
-            <button class="nav-item" data-page="assets"><span>◇</span> Assets</button>
-            <button class="nav-item" data-page="timestamp"><span>◷</span> Timestamp</button>
-            <button class="nav-item" data-page="party"><span>♙</span> Party</button>
-            <button class="nav-item" data-page="secrets"><span>◆</span> Secrets</button>
-            <button class="nav-item" data-page="buttons"><span>▣</span> Buttons</button>
-            <button class="nav-item" data-page="rotation"><span>↻</span> Rotation</button>
-            <div class="nav-label second">PRESENCES</div>
-            <button class="nav-item" data-page="presences"><span>☷</span> Presence List</button>
-            <div class="nav-label second">APPLICATION</div>
-            <button class="nav-item" data-page="settings"><span>⚙</span> Settings</button>
+            <div class="nav-label" data-i18n="nav.configuration">CONFIGURATION</div>
+            <button class="nav-item active" data-page="presence"><svg class="nav-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/></svg><span data-i18n="nav.main">Активность</span></button>
+            <button class="nav-item" data-page="assets"><svg class="nav-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg><span data-i18n="nav.assets">Изображения</span></button>
+            <button class="nav-item" data-page="timestamp"><svg class="nav-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span data-i18n="nav.timestamp">Таймер</span></button>
+            <button class="nav-item" data-page="party"><svg class="nav-icon" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="10" cy="7" r="4"/><path d="M20 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg><span data-i18n="nav.party">Группа</span></button>
+            <button class="nav-item" data-page="secrets"><svg class="nav-icon" viewBox="0 0 24 24"><circle cx="8" cy="15" r="5"/><path d="m11.5 11.5 8-8L22 6l-3 3 2 2-3 3-2-2-3 3"/></svg><span data-i18n="nav.secrets">Секреты</span></button>
+            <button class="nav-item" data-page="buttons"><svg class="nav-icon" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M7 12h4m-2-2v4m5-2h3"/></svg><span data-i18n="nav.buttons">Кнопки</span></button>
+            <button class="nav-item" data-page="rotation"><svg class="nav-icon" viewBox="0 0 24 24"><path d="M20 7v5h-5M4 17v-5h5"/><path d="M5.6 9a7 7 0 0 1 11.6-2L20 12M4 12l2.8 5a7 7 0 0 0 11.6-2"/></svg><span data-i18n="nav.rotation">Ротация</span></button>
+            <div class="nav-label second" data-i18n="nav.presencesGroup">PRESENCES</div>
+            <button class="nav-item" data-page="presences"><svg class="nav-icon" viewBox="0 0 24 24"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg><span data-i18n="nav.presences">Список активностей</span></button>
+            <div class="nav-label second" data-i18n="nav.application">APPLICATION</div>          
+            <button class="nav-item" data-page="settings"><svg class="nav-icon" viewBox="0 0 24 24"><path d="M12 2.8 14 3.3l.6 2.1 1.5.9 2.1-.5 1.4 1.4-.5 2.1.9 1.5 2.1.6v2l-2.1.6-.9 1.5.5 2.1-1.4 1.4-2.1-.5-1.5.9-.6 2.1-2 .5-2-.5-.6-2.1-1.5-.9-2.1.5-1.4-1.4.5-2.1-.9-1.5-2.1-.6v-2l2.1-.6.9-1.5-.5-2.1 1.4-1.4 2.1.5 1.5-.9.6-2.1Z"/><circle cx="12" cy="12" r="3"/></svg><span data-i18n="nav.settings">Настройки</span></button>
         </div>
         <div class="sidebar-preview">
             <div class="sidebar-preview-header">
-                <span>LIVE PREVIEW</span>
+                <span data-i18n="preview.live">ПРЕДПРОСМОТР</span>
                 <span id="sidebar-preview-status" class="sidebar-preview-dot"></span>
             </div>
             <div class="sidebar-discord-card">
                 <div class="sidebar-preview-images">
-                    <div id="sidebar-large-image" class="sidebar-large-image">RP</div>
+                    <div id="sidebar-large-image" class="sidebar-large-image">DRPM</div>
                     <div id="sidebar-small-image" class="sidebar-small-image">●</div>
                 </div>
                 <div class="sidebar-preview-content">
@@ -66,70 +65,96 @@
     <main class="main">
         <header class="topbar">
             <div class="page-heading">
-                <h1 id="page-title">Presence</h1>
+                <h1 id="page-title" data-i18n="nav.main">Активность</h1>
                 <div id="page-description" class="page-description">Основные данные Rich Presence</div>
             </div>
             <div class="topbar-actions">
-                <div id="config-status" class="config-status"><span class="config-status-dot"></span> Configuration ready</div>
-                <div id="status" class="status disconnected"><span></span> Discord disconnected</div>
-                <button id="save-button" class="button secondary">Save</button>
-                <button type="button" id="start-button" class="button primary">Start</button>
+                <div id="config-status" class="config-status">
+                <span class="config-status-dot"></span>
+                <span data-i18n="preview.configReady">Конфигурация готова</span>
+            </div>
+            <div id="status" class="status disconnected">
+                <span class="status-dot" aria-hidden="true"></span>
+                <span class="status-text" data-i18n="rpc.disconnected">Discord не подключён</span>
+            </div>
+                <button id="save-button" class="button secondary" data-i18n="common.save">Сохранить</button>
+                <button type="button" id="start-button" class="button primary" data-i18n="rpc.start">Старт</button>
             </div>
         </header>
         <div class="content">
-            <section class="page active" id="page-presence">
-                <div class="info-banner">
-                    <div class="info-banner-icon">?</div>
-                    <div>
-                        <strong>Getting started</strong>
-                        <p>Укажите Application ID вашего Discord-приложения, затем настройте отображаемый текст. Bot Token для Rich Presence не требуется.</p>
-                    </div>
+            <section class="page active" id="page-presence">  
+            <div class="info-banner">
+                <div class="info-banner-icon">?</div>
+                <div>
+                    <strong data-i18n="presence.intro.title">Начало работы</strong>
+                    <p data-i18n="presence.intro.description">Укажите Application ID вашего Discord-приложения, затем настройте отображаемый текст. Bot Token для Rich Presence не требуется.</p>
                 </div>
+            </div>
                 <div class="card">
                     <div class="card-header">
                         <div>
-                            <h2>Rich Presence</h2>
-                            <p>Основные параметры активности Discord.</p>
+                            <h2 data-i18n="presence.card.title">Rich Presence</h2>
+                            <p data-i18n="presence.card.description">Основные параметры активности Discord.</p>
                         </div>
-                        <span class="required-note">* Required</span>
+                        <span class="required-note" data-i18n="presence.required">* Обязательно</span>
                     </div>
                     <div class="form-grid">
                         <div class="field full">
-                            <label for="applicationName">Application Name <span class="optional">Preview only</span></label>
-                            <input id="applicationName" type="text" maxlength="128" autocomplete="off" placeholder="Например: My Application">
-                            <small>Название приложения из Discord Developer Portal. Используется только для Preview и не изменяет название приложения в Discord.</small>
+                            <label for="applicationName">
+                            <span data-i18n="presence.applicationName">Название приложения</span>
+                            <span class="optional" data-i18n="presence.previewOnly">Только предпросмотр</span>
+                        </label>
+                        <input id="applicationName" type="text" maxlength="128" autocomplete="off"
+                            placeholder="Например: My Application"
+                            data-i18n-placeholder="presence.applicationName.placeholder">
+                        <small data-i18n="presence.applicationName.hint">Название приложения из Discord Developer Portal. Используется только для предпросмотра.</small>
                             <div class="field-meta">
                                 <span></span>
                                 <span class="character-counter" data-counter-for="applicationName">0 / 128</span>
                             </div>
-                            <label for="clientId">Application ID <span class="required">*</span></label>
-                            <input id="clientId" type="text" autocomplete="off" placeholder="Например: 123456789012345678">
-                            <small>Уникальный ID приложения Discord. Его можно найти в Discord Developer Portal.</small>
+                            <label for="clientId">
+                            <span data-i18n="presence.applicationId">Application ID</span>
+                            <span class="required">*</span>
+                        </label>
+                        <input id="clientId" type="text" autocomplete="off"
+                            placeholder="Например: 123456789012345678"
+                            data-i18n-placeholder="presence.applicationId.placeholder">
+                        <small data-i18n="presence.applicationId.hint">Уникальный ID приложения Discord. Его можно найти в Discord Developer Portal.</small>
                             <div id="clientIdError" class="field-error"></div>
                         </div>
                         <div class="field full">
-                            <label for="activityType">Activity Type <span class="required">*</span></label>
-                            <select id="activityType">
-                                <option value="playing">Играет</option>
-                                <option value="listening">Слушает</option>
-                                <option value="watching">Смотрит</option>
-                                <option value="competing">Соревнуется</option>
-                            </select>
-                            <small>Определяет тип активности, который отображается в Discord.</small>
+                            <label for="activityType" data-i18n="presence.activityType">Тип активности *</label>
+                        <select id="activityType">
+                            <option value="playing" data-i18n="presence.playing">Играет</option>
+                            <option value="listening" data-i18n="presence.listening">Слушает</option>
+                            <option value="watching" data-i18n="presence.watching">Смотрит</option>
+                            <option value="competing" data-i18n="presence.competing">Соревнуется</option>
+                        </select>
+                        <small data-i18n="presence.activityType.hint">Определяет тип активности, который отображается в Discord.</small>
                         </div>
                         <div class="field full">
-                            <label for="details">Details <span class="optional">Optional</span></label>
-                            <input id="details" type="text" maxlength="128" placeholder="Например: Working on a project">
+                            <label for="details">
+                            <span data-i18n="presence.details">Details</span>
+                            <span class="optional" data-i18n="common.optional">Необязательно</span>
+                        </label>
+                        <input id="details" type="text" maxlength="128"
+                            placeholder="Например: Working on a project"
+                            data-i18n-placeholder="presence.details.placeholder">
                             <div class="field-meta">
-                                <small>Первая строка текста активности.</small>
+                                <small data-i18n="presence.details.hint">Первая строка текста активности.</small>
                                 <span class="character-counter" data-counter-for="details">0 / 128</span>
                             </div>
                         </div>
                         <div class="field full">
-                            <label for="state">State <span class="optional">Optional</span></label>
-                            <input id="state" type="text" maxlength="128" placeholder="Например: Currently online">
+                            <label for="state">
+                            <span data-i18n="presence.state">State</span>
+                            <span class="optional" data-i18n="common.optional">Необязательно</span>
+                        </label>
+                        <input id="state" type="text" maxlength="128"
+                            placeholder="Например: Currently online"
+                            data-i18n-placeholder="presence.state.placeholder">
                             <div class="field-meta">
-                                <small>Вторая строка текста активности.</small>
+                                <small data-i18n="presence.state.hint">Вторая строка текста активности.</small>
                                 <span class="character-counter" data-counter-for="state">0 / 128</span>
                             </div>
                         </div>
@@ -138,29 +163,29 @@
                 <div class="card">
                     <div class="card-header">
                         <div>
-                            <h2>Discord Instance</h2>
-                            <p>Дополнительный флаг активности.</p>
+                            <h2 data-i18n="presence.instance.title">Экземпляр Discord</h2>
+                            <p data-i18n="presence.instance.description">Дополнительный флаг активности.</p>
                         </div>
                         <label class="switch"><input id="instance" type="checkbox"><span></span></label>
                     </div>
-                    <div class="help-text">Instance используется Discord для определения отдельного экземпляра активности. В большинстве случаев эту настройку можно оставить выключенной.</div>
+                    <div class="help-text" data-i18n="presence.instance.hint">Позволяет Discord различать отдельные экземпляры активности. Обычно можно оставить выключенным.</div>
                 </div>
                 <div class="preview-card">
                     <div class="preview-header">
                         <div>
-                            <div class="preview-title">Preview</div>
-                            <div class="preview-subtitle">Пример того, как может выглядеть активность.</div>
+                            <div class="preview-title" data-i18n="preview.title">Предпросмотр</div>
+                            <div class="preview-subtitle" data-i18n="preview.description">Пример отображения активности.</div>
                         </div>
-                        <span class="preview-label">LIVE PREVIEW</span>
+                        <span class="preview-label" data-i18n="preview.live">ПРЕДПРОСМОТР</span>
                     </div>
                     <div class="discord-preview">
                         <div class="preview-image">DRPM</div>
                         <div class="preview-content">
-                            <div id="preview-type" class="preview-type">Играет</div>
-                            <div id="preview-application" class="preview-application">Your Application</div>
-                            <div id="preview-details" class="preview-details">Your Details</div>
-                            <div id="preview-state" class="preview-state">Your State</div>
-                            <div id="preview-time" class="preview-time">00:00 elapsed</div>
+                            <div id="preview-type" class="preview-type" data-i18n="preview.activityType">Играет</div>
+                            <div id="preview-application" class="preview-application" data-i18n="preview.applicationPlaceholder">Ваше приложение</div>
+                            <div id="preview-details" class="preview-details" data-i18n="preview.detailsPlaceholder">Описание активности</div>
+                            <div id="preview-state" class="preview-state" data-i18n="preview.statePlaceholder">Состояние активности</div>
+                            <div id="preview-time" class="preview-time">00:00 <span data-i18n="timestamp.elapsed">прошло</span></div>
                         </div>
                     </div>
                 </div>
@@ -169,37 +194,37 @@
                 <div class="info-banner">
                     <div class="info-banner-icon">i</div>
                     <div>
-                        <strong>Where do Asset Keys come from?</strong>
-                        <p>Открой Discord Developer Portal → твоё приложение → Rich Presence → Art Assets. Значение Key должно совпадать с именем загруженного изображения.</p>
+                        <strong data-i18n="assets.intro.title">Откуда брать ключи изображений?</strong>
+                        <p data-i18n="assets.intro.description">Открой Discord Developer Portal → своё приложение → Rich Presence → Art Assets. Ключ должен совпадать с именем загруженного изображения.</p>
                     </div>
                 </div>
                 <div class="card">
                     <div class="card-header">
                         <div>
-                            <h2>Assets</h2>
-                            <p>Изображения и подсказки для Rich Presence.</p>
+                            <h2 data-i18n="assets.title">Изображения</h2>
+                            <p data-i18n="assets.description">Изображения и подсказки для Rich Presence.</p>
                         </div>
                     </div>
                     <div class="form-grid">
                         <div class="field">
-                            <label for="largeImageKey">Large Image Key <span class="optional">Optional</span></label>
-                            <input id="largeImageKey" type="text" placeholder="Например: main_logo">
-                            <small>Key большого изображения.</small>
+                            <label for="largeImageKey"><span data-i18n="assets.largeKey">Ключ большого изображения</span> <span class="optional" data-i18n="common.optional">Необязательно</span></label>
+                            <input id="largeImageKey" type="text" placeholder="Например: main_logo" data-i18n-placeholder="assets.largeKey.placeholder">
+                            <small data-i18n="assets.largeKey.hint">Ключ большого изображения.</small>
                         </div>
                         <div class="field">
-                            <label for="largeImageText">Large Image Tooltip <span class="optional">Optional</span></label>
-                            <input id="largeImageText" type="text" placeholder="Например: Основной логотип">
-                            <small>Текст при наведении на изображение.</small>
+                            <label for="largeImageText"><span data-i18n="assets.largeText">Подсказка большого изображения</span> <span class="optional" data-i18n="common.optional">Необязательно</span></label>
+                            <input id="largeImageText" type="text" placeholder="Например: Основной логотип" data-i18n-placeholder="assets.largeText.placeholder">
+                            <small data-i18n="assets.tooltip.hint">Текст при наведении на изображение.</small>
                         </div>
                         <div class="field">
-                            <label for="smallImageKey">Small Image Key <span class="optional">Optional</span></label>
-                            <input id="smallImageKey" type="text" placeholder="Например: status">
-                            <small>Key маленького изображения.</small>
+                            <label for="smallImageKey"><span data-i18n="assets.smallKey">Ключ маленького изображения</span> <span class="optional" data-i18n="common.optional">Необязательно</span></label>
+                            <input id="smallImageKey" type="text" placeholder="Например: status" data-i18n-placeholder="assets.smallKey.placeholder">
+                            <small data-i18n="assets.smallKey.hint">Ключ маленького изображения.</small>
                         </div>
                         <div class="field">
-                            <label for="smallImageText">Small Image Tooltip <span class="optional">Optional</span></label>
-                            <input id="smallImageText" type="text" placeholder="Например: Online">
-                            <small>Текст при наведении на маленькое изображение.</small>
+                            <label for="smallImageText"><span data-i18n="assets.smallText">Подсказка маленького изображения</span> <span class="optional" data-i18n="common.optional">Необязательно</span></label>
+                            <input id="smallImageText" type="text" placeholder="Например: Online" data-i18n-placeholder="assets.smallText.placeholder">
+                            <small data-i18n="assets.tooltip.hint">Текст при наведении на изображение.</small>
                         </div>
                     </div>
                 </div>
@@ -208,33 +233,33 @@
                 <div class="card">
                     <div class="card-header">
                         <div>
-                            <h2>Timestamp</h2>
-                            <p>Таймер активности Discord.</p>
+                            <h2 data-i18n="timestamp.title">Таймер</h2>
+                            <p data-i18n="timestamp.description">Таймер активности Discord.</p>
                         </div>
                     </div>
-                    <div class="help-text">Timestamp всегда включён. Выберите способ отображения времени активности.</div>
+                    <div class="help-text" data-i18n="timestamp.hint">Таймер всегда включён. Выберите способ отображения времени активности.</div>
                     <div id="timestampFields" class="form-grid dependent-fields">
                         <div class="field">
-                            <label for="timestampMode">Mode</label>
+                            <label for="timestampMode" data-i18n="timestamp.mode">Режим</label>
                             <select id="timestampMode">
-                                <option value="elapsed">Elapsed — прошло времени</option>
-                                <option value="remaining">Remaining — осталось времени</option>
+                                <option value="elapsed" data-i18n="timestamp.elapsed">Прошло времени</option>
+                                <option value="remaining" data-i18n="timestamp.remaining">Осталось времени</option>
                             </select>
-                            <small>Определяет формат отображаемого таймера.</small>
+                            <small data-i18n="timestamp.mode.hint">Определяет формат отображаемого таймера.</small>
                         </div>
                         <div class="field">
-                            <label for="durationSeconds">Duration</label>
+                            <label for="durationSeconds" data-i18n="timestamp.duration">Длительность</label>
                             <div class="input-with-suffix">
                                 <input id="durationSeconds" type="number" min="3600" max="3600000">
-                                <span>sec</span>
+                                <span data-i18n="common.seconds">сек.</span>
                             </div>
-                            <small>Используется для Remaining. Максимум — 3600000 секунд. Минимум — 3600 секунд.</small>
+                            <small data-i18n="timestamp.duration.hint">Используется для режима "Осталось времени". Минимум — 3600 секунд, максимум — 3600000 секунд.</small>
                         </div>
                         <div class="field full">
                             <div class="card-header">
                                 <div>
-                                    <label for="resetTimestampOnRotation">Reset timer on Presence change</label>
-                                    <small>Если включено, таймер начнётся заново при каждом переключении Presence.</small>
+                                    <label for="resetTimestampOnRotation" data-i18n="timestamp.resetOnRotation">Сбрасывать таймер при смене активности</label>
+                                    <small data-i18n="timestamp.resetOnRotation.hint">Если включено, таймер начнётся заново при каждом переключении активности.</small>
                                 </div>
                                 <label class="switch"><input id="resetTimestampOnRotation" type="checkbox"><span></span></label>
                             </div>
@@ -246,33 +271,33 @@
                 <div class="info-banner">
                     <div class="info-banner-icon">i</div>
                     <div>
-                        <strong>Party</strong>
-                        <p>Используйте эту функцию, если активность представляет группу игроков. Например: <b>3 of 5 players</b>.</p>
+                        <strong data-i18n="party.intro.title">Группа игроков</strong>
+                        <p data-i18n="party.intro.description">Используйте эту функцию, если активность представляет группу игроков. Например: 3 из 5 игроков.</p>
                     </div>
                 </div>
                 <div class="card">
                     <div class="card-header">
                         <div>
-                            <h2>Party</h2>
-                            <p>Информация о группе игроков.</p>
+                            <h2 data-i18n="party.title">Группа игроков</h2>
+                            <p data-i18n="party.description">Информация о группе игроков.</p>
                         </div>
                         <label class="switch"><input id="partyEnabled" type="checkbox"><span></span></label>
                     </div>
                     <div id="partyFields" class="form-grid dependent-fields">
                         <div class="field full">
-                            <label for="partyId">Party ID <span class="required-when-enabled">Required when enabled</span></label>
-                            <input id="partyId" type="text" placeholder="Уникальный ID группы">
-                            <small>Идентификатор группы игроков.</small>
+                            <label for="partyId"><span data-i18n="party.id">ID группы</span> <span class="required-when-enabled" data-i18n="party.required">Обязательно при включении</span></label>
+                            <input id="partyId" type="text" placeholder="Уникальный ID группы" data-i18n-placeholder="party.id.placeholder">
+                            <small data-i18n="party.id.hint">Идентификатор группы игроков.</small>
                         </div>
                         <div class="field">
-                            <label for="partySize">Current players</label>
+                            <label for="partySize" data-i18n="party.currentPlayers">Текущее количество игроков</label>
                             <input id="partySize" type="number" min="0">
-                            <small>Текущее количество игроков.</small>
+                            <small data-i18n="party.currentPlayers.hint">Текущее количество игроков.</small>
                         </div>
                         <div class="field">
-                            <label for="partyMax">Maximum players</label>
+                            <label for="partyMax" data-i18n="party.maxPlayers">Максимальное количество игроков</label>
                             <input id="partyMax" type="number" min="0">
-                            <small>Максимальный размер группы.</small>
+                            <small data-i18n="party.maxPlayers.hint">Максимальный размер группы.</small>
                         </div>
                     </div>
                 </div>
@@ -281,33 +306,33 @@
                 <div class="card">
                     <div class="card-header">
                         <div>
-                            <h2>Secrets</h2>
-                            <p>Join / Spectate / Match secrets.</p>
+                            <h2 data-i18n="secrets.title">Секреты</h2>
+                            <p data-i18n="secrets.description">Параметры Join / Spectate / Match.</p>
                         </div>
                         <label class="switch"><input id="secretsEnabled" type="checkbox"><span></span></label>
                     </div>
                     <div class="warning">
                         <div class="warning-icon">!</div>
                         <div>
-                            <strong>Important</strong>
-                            <span>Secrets сами по себе не создают систему подключения. Игра должна самостоятельно обрабатывать эти значения.</span>
+                            <strong data-i18n="secrets.warning.title">Важно</strong>
+                            <span data-i18n="secrets.warning.description">Секреты сами по себе не создают систему подключения. Игра должна самостоятельно обрабатывать эти значения.</span>
                         </div>
                     </div>
                     <div id="secretsFields" class="form-grid dependent-fields">
                         <div class="field full">
-                            <label for="joinSecret">Join Secret</label>
-                            <input id="joinSecret" type="text" placeholder="Secret для Join">
-                            <small>Используется при подключении к игре.</small>
+                            <label for="joinSecret" data-i18n="secrets.join">Секрет подключения</label>
+                            <input id="joinSecret" type="text" data-i18n-placeholder="secrets.join.placeholder" placeholder="Secret для Join">
+                            <small data-i18n="secrets.join.hint">Используется при подключении к игре.</small>
                         </div>
                         <div class="field full">
-                            <label for="spectateSecret">Spectate Secret</label>
-                            <input id="spectateSecret" type="text" placeholder="Secret для Spectate">
-                            <small>Используется для просмотра игры.</small>
+                            <label for="spectateSecret" data-i18n="secrets.spectate">Секрет наблюдения</label>
+                            <input id="spectateSecret" type="text" data-i18n-placeholder="secrets.spectate.placeholder" placeholder="Secret для Spectate">
+                            <small data-i18n="secrets.spectate.hint">Используется для просмотра игры.</small>
                         </div>
                         <div class="field full">
-                            <label for="matchSecret">Match Secret</label>
-                            <input id="matchSecret" type="text" placeholder="Secret матча">
-                            <small>Идентификатор конкретного матча.</small>
+                            <label for="matchSecret" data-i18n="secrets.match">Секрет матча</label>
+                            <input id="matchSecret" type="text" data-i18n-placeholder="secrets.match.placeholder" placeholder="Secret матча">
+                            <small data-i18n="secrets.match.hint">Идентификатор конкретного матча.</small>
                         </div>
                     </div>
                 </div>
@@ -316,39 +341,39 @@
                 <div class="info-banner">
                     <div class="info-banner-icon">i</div>
                     <div>
-                        <strong>Custom buttons</strong>
-                        <p>Discord позволяет отображать до двух кнопок. Label — текст кнопки, URL — адрес, который откроется при нажатии.</p>
+                        <strong data-i18n="buttons.intro.title">Пользовательские кнопки</strong>
+                        <p data-i18n="buttons.intro.description">Discord позволяет отображать до двух кнопок. Label - текст кнопки, URL - адрес, который откроется при нажатии.</p>
                     </div>
                 </div>
                 <div class="warning">
                     <div class="warning-icon">!</div>
                     <div>
-                        <strong>Важно</strong>
-                        <span>Кнопки Rich Presence не отображаются владельцу активности в Discord.</span>
+                        <strong data-i18n="buttons.warning.title">Важно</strong>
+                        <span data-i18n="buttons.warning.description">Кнопки Rich Presence не отображаются владельцу активности в Discord.</span>
                     </div>
                 </div>
                 <div class="card">
                     <div class="card-header">
                         <div>
-                            <h2>Custom Buttons</h2>
-                            <p>До двух кнопок в Rich Presence.</p>
+                            <h2 data-i18n="buttons.title">Пользовательские кнопки</h2>
+                            <p data-i18n="buttons.description">До двух кнопок в Rich Presence.</p>
                         </div>
                     </div>
                     <div class="button-editor">
                         <div class="button-number">01</div>
                         <div class="form-grid">
                             <div class="field">
-                                <label for="button1Label">Label</label>
-                                <input id="button1Label" type="text" maxlength="32" placeholder="Например: Discord">
+                                <label for="button1Label" data-i18n="buttons.label">Текст кнопки</label>
+                                <input id="button1Label" type="text" maxlength="32" data-i18n-placeholder="buttons.label.placeholder" placeholder="Например: Discord">
                                 <div class="field-meta">
-                                    <small>Текст кнопки.</small>
+                                    <small data-i18n="buttons.label.hint">Текст кнопки.</small>
                                     <span class="character-counter" data-counter-for="button1Label">0 / 32</span>
                                 </div>
                             </div>
                             <div class="field">
-                                <label for="button1Url">URL</label>
+                                <label for="button1Url" data-i18n="buttons.url">Ссылка</label>
                                 <input id="button1Url" type="url" placeholder="https://...">
-                                <small>Должен начинаться с https:// или http://.</small>
+                                <small data-i18n="buttons.url.hint">Должен начинаться с https:// или http://.</small>
                             </div>
                         </div>
                     </div>
@@ -356,17 +381,17 @@
                         <div class="button-number">02</div>
                         <div class="form-grid">
                             <div class="field">
-                                <label for="button2Label">Label</label>
-                                <input id="button2Label" type="text" maxlength="32" placeholder="Например: Website">
+                                <label for="button2Label" data-i18n="buttons.label">Текст кнопки</label>
+                                <input id="button2Label" type="text" maxlength="32" data-i18n-placeholder="buttons.website.placeholder" placeholder="Например: Website">
                                 <div class="field-meta">
-                                    <small>Текст кнопки.</small>
+                                    <small data-i18n="buttons.label.hint">Текст кнопки.</small>
                                     <span class="character-counter" data-counter-for="button2Label">0 / 32</span>
                                 </div>
                             </div>
                             <div class="field">
-                                <label for="button2Url">URL</label>
+                                <label for="button2Url" data-i18n="buttons.url">Ссылка</label>
                                 <input id="button2Url" type="url" placeholder="https://...">
-                                <small>Должен начинаться с https:// или http://.</small>
+                                <small data-i18n="buttons.url.hint">Должен начинаться с https:// или http://.</small>
                             </div>
                         </div>
                     </div>
@@ -376,123 +401,140 @@
                 <div class="info-banner">
                     <div class="info-banner-icon">i</div>
                     <div>
-                        <strong>How rotation works</strong>
-                        <p>После включения программа будет автоматически выбирать случайный Presence из Presence List через случайный интервал.</p>
+                        <strong data-i18n="rotation.intro.title">Как работает ротация</strong>
+                        <p data-i18n="rotation.intro.description">Программа будет автоматически выбирать случайную активность из списка через случайные интервалы.</p>
                     </div>
                 </div>
                 <div class="card">
                     <div class="card-header">
                         <div>
-                            <h2>Presence Rotation</h2>
-                            <p>Автоматически менять Presence через случайный интервал.</p>
+                            <h2 data-i18n="rotation.title">Ротация активностей</h2>
+                            <p data-i18n="rotation.description">Автоматическая смена активности через случайные интервалы.</p>
                         </div>
                         <label class="switch"><input id="rotationEnabled" type="checkbox"><span></span></label>
                     </div>
                     <div id="rotationFields" class="form-grid dependent-fields">
                         <div class="field">
-                            <label for="rotationMin">Minimum interval</label>
+                            <label for="rotationMin" data-i18n="rotation.minimum">Минимальный интервал</label>
                             <div class="input-with-suffix">
                                 <input id="rotationMin" type="number" min="1">
-                                <span>sec</span>
+                                <span data-i18n="common.seconds">сек.</span>
                             </div>
-                            <small>Минимальная задержка между сменами.</small>
+                            <small data-i18n="rotation.minimum.hint">Минимальная задержка между сменами.</small>
                         </div>
                         <div class="field">
-                            <label for="rotationMax">Maximum interval</label>
+                            <label for="rotationMax" data-i18n="rotation.maximum">Максимальный интервал</label>
                             <div class="input-with-suffix">
                                 <input id="rotationMax" type="number" min="1">
-                                <span>sec</span>
+                                <span data-i18n="common.seconds">сек.</span>
                             </div>
-                            <small>Максимальная задержка между сменами.</small>
+                            <small data-i18n="rotation.maximum.hint">Максимальная задержка между сменами.</small>
                         </div>
                     </div>
-                    <div class="rotation-requirement"><span>!</span> Для работы Rotation должен содержать хотя бы один Presence в Presence List.</div>
-                </div>
+                    <div class="rotation-requirement"><span class="rotation-requirement-icon">!</span><div data-i18n="rotation.requirement">Для работы ротации в списке активностей должна быть хотя бы одна активность.</div></div>
+                    </div>
             </section>
             <section class="page" id="page-presences">
                 <div class="card">
                     <div class="card-header">
                         <div>
-                            <h2>Presence List</h2>
-                            <p>Набор Presence для ротации.</p>
+                            <h2 data-i18n="presences.title">Список активностей</h2>
+                            <p data-i18n="presences.description">Набор активностей для ротации.</p>
                         </div>
-                        <button id="addPresence" class="button primary">+ Add Presence</button>
+                        <button id="addPresence" class="button primary" data-i18n="presences.add">+ Добавить активность</button>
                     </div>
                     <div id="presence-list" class="presence-list"></div>
                     <div id="empty-presence-list" class="empty-state">
                         <div class="empty-icon">☷</div>
-                        <strong>No saved presences</strong>
-                        <span>Добавьте первый Presence, чтобы использовать Rotation.</span>
-                        <button id="empty-add-presence" class="button secondary">+ Add Presence</button>
+                        <strong data-i18n="presences.empty.title">Нет сохранённых активностей</strong>
+                        <span data-i18n="presences.empty.description">Добавьте первую активность, чтобы использовать ротацию.</span>
+                        <button id="empty-add-presence" class="button secondary" data-i18n="presences.add">+ Добавить активность</button>
                     </div>
                 </div>
             </section>
             <section class="page" id="page-settings">
                 <div class="page-header">
                     <div>
-                        <h2>Application Settings</h2>
-                        <p>Управление конфигурациями Rich Presence.</p>
+                        <h2 data-i18n="settings.title">Настройки приложения</h2>
+                        <p data-i18n="settings.description">Управление конфигурациями и параметрами приложения.</p>
                     </div>
                 </div>
+
                 <div class="settings-grid">
                     <div class="card">
                         <div class="card-header">
                             <div>
-                                <h2>Configuration Profiles</h2>
-                                <p>Сохраняйте несколько наборов Rich Presence и переключайтесь между ними.</p>
+                                <h2 data-i18n="settings.language.title">Язык интерфейса</h2>
+                                <p data-i18n="settings.language.description">Выберите язык приложения. Изменения применяются сразу.</p>
                             </div>
                         </div>
                         <div class="field">
-                            <label for="config-profile-select">Saved configurations</label>
-                            <select id="config-profile-select"><option value="">No saved configurations</option></select>
+                            <label for="language-select" data-i18n="settings.language.label">Язык</label>
+                            <select id="language-select">
+                                <option value="ru">Русский</option>
+                                <option value="en">English</option>
+                            </select>
+                            <small data-i18n="settings.language.hint">Выбранный язык будет сохранён и использован при следующем запуске.</small>
                         </div>
-                        <div class="button-row">
-                            <button id="load-profile-button" class="button primary" type="button">Load</button>
-                            <button id="delete-profile-button" class="button danger" type="button">Delete</button>
-                        </div>
-                        <div class="field">
-                            <label for="config-profile-name">New configuration name</label>
-                            <input id="config-profile-name" type="text" maxlength="64" autocomplete="off" placeholder="Gaming">
-                            <small>Например: Gaming, Work, Development, Config или Test.</small>
-                        </div>
-                        <button id="save-profile-button" class="button primary" type="button">Save As</button>
-                        <button id="new-config-button" class="button" type="button">New Config</button>
                     </div>
                     <div class="card">
                         <div class="card-header">
                             <div>
-                                <h2>Configuration Files</h2>
-                                <p>Экспортируйте конфигурацию в JSON или импортируйте её с другого компьютера.</p>
+                                <h2 data-i18n="settings.profiles.title">Профили конфигурации</h2>
+                                <p data-i18n="settings.profiles.description">Сохраняйте несколько наборов активностей и переключайтесь между ними.</p>
                             </div>
                         </div>
-                        <div class="settings-info">
-                            <div class="settings-info-item"><strong>Export</strong><span>Сохранить текущую конфигурацию в JSON-файл.</span></div>
-                            <div class="settings-info-item"><strong>Import</strong><span>Загрузить конфигурацию из JSON-файла.</span></div>
+                        <div class="field">
+                            <label for="config-profile-select" data-i18n="settings.profiles.saved">Сохранённые конфигурации</label>
+                            <select id="config-profile-select"><option value="" data-i18n="settings.profiles.none">Нет сохранённых конфигураций</option></select>
                         </div>
                         <div class="button-row">
-                            <button id="export-config-button" class="button secondary" type="button">Export JSON</button>
-                            <button id="import-config-button" class="button primary" type="button">Import JSON</button>
+                            <button id="load-profile-button" class="button primary" type="button" data-i18n="common.load">Загрузить</button>
+                            <button id="delete-profile-button" class="button danger" type="button" data-i18n="common.delete">Удалить</button>
                         </div>
-                        <div class="help-text">Импорт заменит текущую активную конфигурацию. Сохранённые профили при этом не изменяются.</div>
+                        <div class="field">
+                            <label for="config-profile-name" data-i18n="settings.profiles.newName">Название новой конфигурации</label>
+                            <input id="config-profile-name" type="text" maxlength="64" autocomplete="off" placeholder="Например: Gaming" data-i18n-placeholder="settings.profiles.namePlaceholder">
+                            <small data-i18n="settings.profiles.nameHint">Например: Gaming, Work, Development, Config или Test.</small>
+                        </div>
+                        <button id="save-profile-button" class="button primary" type="button" data-i18n="settings.profiles.saveAs">Сохранить как</button>
+                        <button id="new-config-button" class="button" type="button" data-i18n="settings.profiles.new">Новая конфигурация</button>
                     </div>
                     <div class="card">
                         <div class="card-header">
                             <div>
-                                <h2>Configuration Storage</h2>
-                                <p>Информация о хранении конфигураций.</p>
+                                <h2 data-i18n="settings.files.title">Файлы конфигурации</h2>
+                                <p data-i18n="settings.files.description">Экспортируйте конфигурацию в JSON или импортируйте её с другого компьютера.</p>
                             </div>
                         </div>
                         <div class="settings-info">
-                            <div class="settings-info-item"><strong>Active configuration</strong><span>config.json</span></div>
-                            <div class="settings-info-item"><strong>Saved profiles</strong><span>Управляются приложением</span></div>
-                            <div class="settings-info-item"><strong>RPC</strong><span>При загрузке профиля активный Rich Presence обновляется автоматически.</span></div>
+                            <div class="settings-info-item"><strong data-i18n="settings.files.export">Экспорт</strong><span data-i18n="settings.files.exportHint">Сохранить текущую конфигурацию в JSON-файл.</span></div>
+                            <div class="settings-info-item"><strong data-i18n="settings.files.import">Импорт</strong><span data-i18n="settings.files.importHint">Загрузить конфигурацию из JSON-файла.</span></div>
+                        </div>
+                        <div class="button-row">
+                            <button id="export-config-button" class="button secondary" type="button" data-i18n="settings.files.exportJson">Экспорт JSON</button>
+                            <button id="import-config-button" class="button primary" type="button" data-i18n="settings.files.importJson">Импорт JSON</button>
+                        </div>
+                        <div class="help-text" data-i18n="settings.files.importWarning">Импорт заменит текущую активную конфигурацию. Сохранённые профили при этом не изменяются.</div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <div>
+                                <h2 data-i18n="settings.storage.title">Хранение конфигураций</h2>
+                                <p data-i18n="settings.storage.description">Информация о хранении конфигураций.</p>
+                            </div>
+                        </div>
+                        <div class="settings-info">
+                            <div class="settings-info-item"><strong data-i18n="settings.storage.active">Активная конфигурация</strong><span>config.json</span></div>
+                            <div class="settings-info-item"><strong data-i18n="settings.storage.profiles">Сохранённые профили</strong><span data-i18n="settings.storage.managed">Управляются приложением</span></div>
+                            <div class="settings-info-item"><strong>RPC</strong><span data-i18n="settings.storage.rpcHint">При загрузке профиля активный Rich Presence обновляется автоматически.</span></div>
                         </div>
                     </div>
                 </div>
             </section>
         </div>
         <footer class="footer">
-            <div>Discord Rich Presence Manager v1.0.0</div>
+            <div>Discord Rich Presence Manager v1.0.1</div>
             <div>2026 | rootvex · Free for personal &amp; non-commercial use</div>
         </footer>
     </main>
@@ -502,45 +544,46 @@
     <div class="modal">
         <div class="modal-header">
             <div>
-                <div id="modal-title" class="modal-title">Add Presence</div>
-                <div class="modal-subtitle">Настройте отдельный вариант Rich Presence.</div>
+                <div id="modal-title" class="modal-title" data-i18n="modal.title">Добавить активность</div>
+                <div class="modal-subtitle" data-i18n="modal.description">Настройте отдельный вариант Rich Presence.</div>
             </div>
             <button id="modal-close" class="modal-close" type="button">×</button>
         </div>
         <div class="modal-body">
             <div class="form-grid">
                 <div class="field full">
-                    <label for="modalDetails">Details</label>
-                    <input id="modalDetails" type="text" maxlength="128" placeholder="Что сейчас происходит?">
+                    <label for="modalDetails" data-i18n="modal.details">Details</label>
+                    <input id="modalDetails" type="text" maxlength="128" placeholder="Что сейчас происходит?" data-i18n-placeholder="modal.details.placeholder">
                 </div>
                 <div class="field full">
-                    <label for="modalState">State</label>
-                    <input id="modalState" type="text" maxlength="128" placeholder="Где находится пользователь?">
+                    <label for="modalState" data-i18n="modal.state">State</label>
+                    <input id="modalState" type="text" maxlength="128" placeholder="Где находится пользователь?" data-i18n-placeholder="modal.state.placeholder">
                 </div>
                 <div class="field">
-                    <label for="modalLargeImageKey">Large Image Key</label>
-                    <input id="modalLargeImageKey" type="text" placeholder="Asset key">
+                    <label for="modalLargeImageKey" data-i18n="modal.largeImageKey">Ключ большого изображения</label>
+                    <input id="modalLargeImageKey" type="text" placeholder="Ключ изображения" data-i18n-placeholder="modal.assetKey.placeholder">
                 </div>
                 <div class="field">
-                    <label for="modalLargeImageText">Large Image Tooltip</label>
-                    <input id="modalLargeImageText" type="text" placeholder="Tooltip">
+                    <label for="modalLargeImageText" data-i18n="modal.largeImageText">Подсказка большого изображения</label>
+                    <input id="modalLargeImageText" type="text" placeholder="Текст подсказки" data-i18n-placeholder="modal.tooltip.placeholder">
                 </div>
                 <div class="field">
-                    <label for="modalSmallImageKey">Small Image Key</label>
-                    <input id="modalSmallImageKey" type="text" placeholder="Asset key">
+                    <label for="modalSmallImageKey" data-i18n="modal.smallImageKey">Ключ маленького изображения</label>
+                    <input id="modalSmallImageKey" type="text" placeholder="Ключ изображения" data-i18n-placeholder="modal.assetKey.placeholder">
                 </div>
                 <div class="field">
-                    <label for="modalSmallImageText">Small Image Tooltip</label>
-                    <input id="modalSmallImageText" type="text" placeholder="Tooltip">
+                    <label for="modalSmallImageText" data-i18n="modal.smallImageText">Подсказка маленького изображения</label>
+                    <input id="modalSmallImageText" type="text" placeholder="Текст подсказки" data-i18n-placeholder="modal.tooltip.placeholder">
                 </div>
             </div>
         </div>
         <div class="modal-footer">
-            <button id="modal-cancel" class="button secondary" type="button">Cancel</button>
-            <button id="modal-save" class="button primary" type="button">Save Presence</button>
+            <button id="modal-cancel" class="button secondary" type="button" data-i18n="common.cancel">Отмена</button>
+            <button id="modal-save" class="button primary" type="button" data-i18n="modal.save">Сохранить активность</button>
         </div>
     </div>
 </div>
+<script src="i18n.js"></script>
 <script src="renderer.js"></script>
 </body>
 </html>

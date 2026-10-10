@@ -5,18 +5,53 @@ let editingPresenceIndex = -1;
 let discordConnected = false;
 
 const pages = {
-    presence: { title: "Presence", description: "Основные данные Rich Presence" },
-    assets: { title: "Assets", description: "Изображения и подсказки" },
-    timestamp: { title: "Timestamp", description: "Настройка времени активности" },
-    party: { title: "Party", description: "Информация о группе игроков" },
-    secrets: { title: "Secrets", description: "Join, Spectate и Match" },
-    buttons: { title: "Buttons", description: "Кнопки Rich Presence" },
-    rotation: { title: "Rotation", description: "Автоматическая смена Presence" },
-    presences: { title: "Presence List", description: "Набор доступных Presence" },
-    settings: { title: "Settings", description: "Управление конфигурациями приложения" }
+    presence: { title: "nav.main", description: "page.presence.description" },
+    assets: { title: "nav.assets", description: "page.assets.description" },
+    timestamp: { title: "nav.timestamp", description: "page.timestamp.description" },
+    party: { title: "nav.party", description: "page.party.description" },
+    secrets: { title: "nav.secrets", description: "page.secrets.description" },
+    buttons: { title: "nav.buttons", description: "page.buttons.description" },
+    rotation: { title: "nav.rotation", description: "page.rotation.description" },
+    presences: { title: "nav.presences", description: "page.presences.description" },
+    settings: { title: "nav.settings", description: "settings.description" }
 };
 
 const $ = id => document.getElementById(id);
+
+const LANG_KEY = "drpm-language";
+
+function applyLanguage(lang, notify = false) {
+    if (!getAvailableLanguages().includes(lang)) lang = "ru";
+    setLanguage(lang);
+    setStartButton(discordConnected);
+
+    const selector = $("language-select");
+    if (selector) selector.value = lang;
+
+    document.querySelectorAll(".nav-item.active").forEach(el => navigate(el.dataset.page));
+    if (config) {
+        updatePreview();
+        renderPresenceList();
+        updateConfigStatus();
+    }
+    if (notify) showToast(t("language.changed"));
+}
+
+function initializeLanguage() {
+    let lang = "ru";
+    try {
+        lang = localStorage.getItem(LANG_KEY) || "ru";
+    } catch {}
+
+    applyLanguage(lang);
+
+    $("language-select")?.addEventListener("change", e => {
+        applyLanguage(e.target.value, true);
+        try {
+            localStorage.setItem(LANG_KEY, getLanguage());
+        } catch {}
+    });
+}
 
 function createDefaultConfig() {
     return {
@@ -76,8 +111,8 @@ function normalizeConfig(source) {
     const result = { ...defaults, ...(source || {}) };
     const validActivityTypes = ["playing", "listening", "watching", "competing"];
 
-    if (!validActivityTypes.includes(config.activityType)) {
-        config.activityType = "playing";
+    if (!validActivityTypes.includes(result.activityType)) {
+        result.activityType = "playing";
     }
 
     result.application = {
@@ -90,11 +125,8 @@ function normalizeConfig(source) {
         ...(source?.application?.timestamps || {})
     };
 
-    if (
-        config.application.timestamps.mode !== "elapsed" &&
-        config.application.timestamps.mode !== "remaining"
-    ) {
-        config.application.timestamps.mode = "elapsed";
+    if (!["elapsed", "remaining"].includes(result.application.timestamps.mode)) {
+        result.application.timestamps.mode = "elapsed";
     }
 
     result.application.party = {
@@ -134,8 +166,20 @@ function navigate(pageName) {
         page.classList.toggle("active", page.id === `page-${pageName}`);
     });
 
-    $("page-title").textContent = pages[pageName].title;
-    $("page-description").textContent = pages[pageName].description;
+    const keys = {
+        presence: ["nav.main", "page.presence.description"],
+        assets: ["nav.assets", "page.assets.description"],
+        timestamp: ["nav.timestamp", "page.timestamp.description"],
+        party: ["nav.party", "page.party.description"],
+        secrets: ["nav.secrets", "page.secrets.description"],
+        buttons: ["nav.buttons", "page.buttons.description"],
+        rotation: ["nav.rotation", "page.rotation.description"],
+        presences: ["nav.presences", "page.presences.description"],
+        settings: ["nav.settings", "settings.description"]
+    }[pageName];
+
+    $("page-title").textContent = t(keys[0]);
+    $("page-description").textContent = t(keys[1]);
 }
 
 function safeNumber(value, fallback) {
@@ -552,33 +596,22 @@ function validateConfig() {
 
 function updateConfigStatus() {
     if (!config) return;
-
     const status = $("config-status");
     if (!status) return;
-
-    const dot = status.querySelector(".config-status-dot");
-
+    const statusText = status.querySelector(".config-status-text") || status.querySelector("[data-i18n]");
     status.classList.remove("warning", "error");
-
+    let key = "status.configReady";
     if (!config.clientId) {
         status.classList.add("error");
-        status.lastChild.textContent = " Application ID required";
-        return;
-    }
-
-    if (config.rotation.enabled && config.presences.length === 0) {
+        key = "status.applicationIdRequired";
+    } else if (config.rotation.enabled && config.presences.length === 0) {
         status.classList.add("warning");
-        status.lastChild.textContent = " Rotation needs a Presence";
-        return;
-    }
-
-    if (config.application.party.enabled && !config.application.party.id) {
+        key = "status.rotationNeedsPresence";
+    } else if (config.application.party.enabled && !config.application.party.id) {
         status.classList.add("warning");
-        status.lastChild.textContent = " Party ID required";
-        return;
+        key = "status.partyIdRequired";
     }
-
-    status.lastChild.textContent = " Configuration ready";
+    if (statusText) statusText.textContent = t(key);
 }
 
 async function saveConfig(showSuccessToast = true) {
@@ -659,16 +692,11 @@ async function stopRPC() {
 
 function setStartButton(running) {
     const button = $("start-button");
-
-    if (running) {
-        button.textContent = "Stop";
-        button.classList.remove("primary");
-        button.classList.add("danger");
-    } else {
-        button.textContent = "Start";
-        button.classList.remove("danger");
-        button.classList.add("primary");
-    }
+    if (!button) return;
+    button.dataset.running = String(running);
+    button.textContent = t(running ? "rpc.stop" : "rpc.start");
+    button.classList.toggle("danger", running);
+    button.classList.toggle("primary", !running);
 }
 
 function setDependentState(containerId, enabled) {
@@ -693,44 +721,36 @@ function updateSidebarPreview() {
     if (!config) return;
 
     const app = config.application;
-    const sidebarType = $("sidebar-preview-type");
 
+    const sidebarType = $("sidebar-preview-type");
     if (sidebarType) {
         sidebarType.textContent = getActivityTypeLabel(config.activityType);
     }
 
     const application = $("sidebar-preview-application");
-
     if (application) {
         application.textContent =
-            config.applicationName?.trim() || "Your Application";
+            config.applicationName?.trim() || t("preview.applicationPlaceholder");
     }
 
     const details = $("sidebar-preview-details");
-
     if (details) {
-        details.textContent = app.details?.trim() || "Your Details";
+        details.textContent = app.details?.trim() || t("preview.detailsPlaceholder");
     }
 
     const state = $("sidebar-preview-state");
-
     if (state) {
-        state.textContent = app.state?.trim() || "Your State";
+        state.textContent = app.state?.trim() || t("preview.statePlaceholder");
     }
 
     const largeImage = $("sidebar-large-image");
-
     if (largeImage) {
-        if (app.largeImageKey?.trim()) {
-            largeImage.textContent =
-                app.largeImageKey.trim().substring(0, 8).toUpperCase();
-        } else {
-            largeImage.textContent = "RP";
-        }
+        largeImage.textContent = app.largeImageKey?.trim()
+            ? app.largeImageKey.trim().substring(0, 8).toUpperCase()
+            : "RP";
     }
 
     const smallImage = $("sidebar-small-image");
-
     if (smallImage) {
         if (app.smallImageKey?.trim()) {
             smallImage.classList.remove("hidden");
@@ -741,28 +761,21 @@ function updateSidebarPreview() {
     }
 
     const time = $("sidebar-preview-time");
-
     if (time) {
-        if (app.timestamps.mode === "remaining") {
-            time.textContent =
-                formatDuration(app.timestamps.durationSeconds) +
-                " remaining";
-        } else {
-            time.textContent = "00:00 elapsed";
-        }
+        time.textContent = app.timestamps.mode === "remaining"
+            ? formatDuration(app.timestamps.durationSeconds) + " " + t("timestamp.remaining")
+            : "00:00 " + t("timestamp.elapsed");
     }
 
     const party = $("sidebar-preview-party");
-
     if (party) {
         if (app.party?.enabled) {
             party.classList.remove("hidden");
 
             const partyText = $("sidebar-party-text");
-
             if (partyText) {
                 partyText.textContent =
-                    `${app.party.size || 0} of ${app.party.max || 0}`;
+                    `${app.party.size || 0} ${t("party.of")} ${app.party.max || 0}`;
             }
         } else {
             party.classList.add("hidden");
@@ -770,13 +783,10 @@ function updateSidebarPreview() {
     }
 
     const buttonsContainer = $("sidebar-preview-buttons");
-
     if (buttonsContainer) {
         buttonsContainer.innerHTML = "";
 
-        const buttons = Array.isArray(app.buttons)
-            ? app.buttons
-            : [];
+        const buttons = Array.isArray(app.buttons) ? app.buttons : [];
 
         buttons.slice(0, 2).forEach(button => {
             if (!button?.label) return;
@@ -794,7 +804,6 @@ function updateSidebarPreview() {
     }
 
     const features = $("sidebar-preview-features");
-
     if (features) {
         features.innerHTML = "";
 
@@ -802,40 +811,35 @@ function updateSidebarPreview() {
             const badge = document.createElement("span");
             badge.className = "sidebar-preview-feature";
 
-            if (warning) {
-                badge.classList.add("warning");
-            }
+            if (warning) badge.classList.add("warning");
 
             badge.textContent = text;
             features.appendChild(badge);
         };
 
-        addFeature("Timestamp");
+        addFeature(t("preview.feature.timestamp"));
 
         if (app.party?.enabled) {
-            addFeature("Party");
+            addFeature(t("preview.feature.party"));
         }
 
         if (app.secrets?.enabled) {
-            addFeature("Secrets");
+            addFeature(t("preview.feature.secrets"));
         }
 
         if (config.rotation?.enabled) {
-            if (config.presences.length > 0) {
-                addFeature("Rotation");
-            } else {
-                addFeature("Rotation: empty", true);
-            }
+            addFeature(
+                config.presences.length > 0
+                    ? t("preview.feature.rotation")
+                    : t("preview.feature.rotationEmpty"),
+                config.presences.length === 0
+            );
         }
 
-        features.classList.toggle(
-            "hidden",
-            features.children.length === 0
-        );
+        features.classList.toggle("hidden", features.children.length === 0);
     }
 
     const statusDot = $("sidebar-preview-status");
-
     if (statusDot) {
         statusDot.classList.toggle("active", discordConnected);
     }
@@ -876,34 +880,34 @@ function updatePreview() {
     }
 
     $("preview-application").textContent =
-        config.applicationName?.trim() || "Your Application";
+        config.applicationName?.trim() || t("preview.applicationPlaceholder");
 
     $("preview-details").textContent =
-        app.details?.trim() || "Your Details";
+        app.details?.trim() || t("preview.detailsPlaceholder");
 
     $("preview-state").textContent =
-        app.state?.trim() || "Your State";
+        app.state?.trim() || t("preview.statePlaceholder");
 
     if (app.timestamps.mode === "remaining") {
         $("preview-time").textContent =
             formatDuration(app.timestamps.durationSeconds) +
-            " remaining";
+            " " + t("timestamp.remaining");
     } else {
-        $("preview-time").textContent = "00:00 elapsed";
+        $("preview-time").textContent = "00:00 " + t("timestamp.elapsed");
     }
 
     updateSidebarPreview();
 }
 
 function getActivityTypeLabel(type) {
-    const labels = {
-        playing: "Играет",
-        listening: "Слушает",
-        watching: "Смотрит",
-        competing: "Соревнуется"
+    const keys = {
+        playing: "presence.playing",
+        listening: "presence.listening",
+        watching: "presence.watching",
+        competing: "presence.competing"
     };
 
-    return labels[type] || labels.playing;
+    return t(keys[type] || keys.playing);
 }
 
 function updateCharacterCounters() {
@@ -942,8 +946,8 @@ function renderPresenceList() {
         const item = document.createElement("div");
         item.className = "presence-item";
 
-        const details = presence.details || "Untitled Presence";
-        const state = presence.state || "No state";
+        const details = presence.details || t("presences.untitled");
+        const state = presence.state || t("presences.noState");
 
         item.innerHTML = `
             <div class="presence-index">${String(index + 1).padStart(2, "0")}</div>
@@ -952,8 +956,8 @@ function renderPresenceList() {
                 <div class="presence-state">${escapeHtml(state)}</div>
             </div>
             <div class="presence-actions">
-                <button class="icon-button" data-action="edit" data-index="${index}" title="Edit">✎</button>
-                <button class="icon-button delete" data-action="delete" data-index="${index}" title="Delete">×</button>
+                <button class="icon-button" data-action="edit" data-index="${index}" title="${t("presences.edit")}">✎</button>
+                <button class="icon-button delete" data-action="delete" data-index="${index}" title="${t("presences.delete")}">×</button>
             </div>
         `;
 
@@ -963,14 +967,12 @@ function renderPresenceList() {
 
 function openPresenceModal(index = -1) {
     editingPresenceIndex = index;
-
     const modal = $("presence-modal");
     const title = $("modal-title");
     let presence;
-
     if (index >= 0 && config.presences[index]) {
         presence = config.presences[index];
-        title.textContent = "Edit Presence";
+        title.textContent = t("modal.edit");
     } else {
         presence = createDefaultPresence({
             largeImageKey: config.application.largeImageKey || "",
@@ -978,19 +980,15 @@ function openPresenceModal(index = -1) {
             smallImageKey: config.application.smallImageKey || "",
             smallImageText: config.application.smallImageText || ""
         });
-
-        title.textContent = "Add Presence";
+        title.textContent = t("modal.add");
     }
-
     $("modalDetails").value = presence.details || "";
     $("modalState").value = presence.state || "";
     $("modalLargeImageKey").value = presence.largeImageKey || "";
     $("modalLargeImageText").value = presence.largeImageText || "";
     $("modalSmallImageKey").value = presence.smallImageKey || "";
     $("modalSmallImageText").value = presence.smallImageText || "";
-
     modal.hidden = false;
-
     setTimeout(() => $("modalDetails").focus(), 50);
 }
 
@@ -1041,29 +1039,20 @@ function updateLivePreviewFromUI() {
     updatePreview();
 }
 
+
 function updateDiscordStatus(data) {
     const status = $("status");
     if (!status) return;
-
     const connected = !!data?.connected;
     discordConnected = connected;
-
     status.classList.toggle("connected", connected);
     status.classList.toggle("disconnected", !connected);
-
-    status.lastChild.textContent =
-        connected
-            ? " Discord connected"
-            : " Discord disconnected";
-
-    const sidebarDot = $("sidebar-preview-status");
-
-    if (sidebarDot) {
-        sidebarDot.classList.toggle("active", connected);
-    }
-
+    const statusText = status.querySelector("span:nth-child(2)");
+    if (statusText) statusText.textContent = t(connected ? "rpc.connected" : "rpc.disconnected");
+    $("sidebar-preview-status")?.classList.toggle("active", connected);
     setStartButton(connected);
 }
+
 
 function setupNavigation() {
     document.querySelectorAll(".nav-item").forEach(button => {
@@ -1100,7 +1089,7 @@ function setupButtons() {
     $("save-button").addEventListener("click", saveConfig);
 
     $("start-button").addEventListener("click", async () => {
-        const running = $("start-button").textContent === "Stop";
+        const running = $("start-button").dataset.running === "true";
 
         if (running) {
             await stopRPC();
@@ -1225,6 +1214,7 @@ async function initialize() {
     }
 }
 
+initializeLanguage();
 setupNavigation();
 setupInputEvents();
 setupButtons();

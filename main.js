@@ -15,7 +15,7 @@ const fs = require("fs");
 const { Client: DiscordRPCClient } = require("@xhayper/discord-rpc");
 
 const APP_NAME = "Discord Rich Presence Manager";
-const VERSION = "1.0.0";
+const VERSION = "1.0.1";
 const ACTIVITY_TYPES = {
     playing: 0,
     listening: 2,

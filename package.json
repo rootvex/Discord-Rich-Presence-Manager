@@ -23,6 +23,7 @@
             "index.html",
             "style.css",
             "renderer.js",
+	    "i18n.js",
             "package.json",
             "node_modules/**/*",
             "assets/**/*"
